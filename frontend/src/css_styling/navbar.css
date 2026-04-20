@@ -1,0 +1,158 @@
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;              /* 🔥 FULL WIDTH */
+  height: 60px;
+
+  padding: 0 30px;          /* 🔥 adjust spacing */
+  box-sizing: border-box;   /* 🔥 prevents overflow */
+
+  background: #000000;
+  color: white;
+
+  position: fixed;          /* 🔥 stays on top */
+  top: 0;
+  left: 0;
+
+  z-index: 1000;            /* 🔥 always above content */
+  backdrop-filter: blur(10px);
+}
+.navbar-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 65%;              /*  MATCH RIGHT PANEL */
+  height: 60px;
+
+  background: #00000000;
+}
+
+/* LOGO */
+.logo {
+  font-size: 22px;
+  font-weight: 600;
+  color: #22c55e; 
+}
+
+/* PROFILE WRAPPER */
+.profile-wrapper {
+  position: relative;
+}
+/* ===== AVATAR CONTAINER ===== */
+.avatar-container {
+  position: relative;   /* IMPORTANT for badge */
+  width: 32px;
+  height: 32px;
+}
+
+/* PROFILE IMAGE */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;   /*  circle */
+  object-fit: cover;
+}
+
+/* GREEN DOT */
+.status-dot {
+  position: absolute;   /*  floating dot */
+  top: -2px;
+  right: -2px;
+
+  width: 10px;
+  height: 10px;
+
+  background: #22c55e;  /*  green */
+  border: 2px solid #0f172a; /*  match navbar bg */
+
+  border-radius: 50%;
+}
+
+/* PROFILE TEXT */
+.profile-text {
+  margin-left: 8px;
+}
+
+/* ===== PROFILE BUTTON ===== */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* ICON */
+.avatar {
+  font-size: 14px;
+}
+.avatar-img {
+  box-shadow: 0 0 10px rgba(34,197,94,0.6);
+}
+
+/* ARROW */
+.arrow {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* HOVER EFFECT */
+.profile-btn:hover .avatar-img {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+
+  background: rgba(15, 23, 42, 0.7); /*  dropdown bg */
+  border-radius: 12px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+
+  animation: fadeIn 0.2s ease;
+}
+
+/* LINKS */
+.dropdown a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.dropdown a:hover {
+  background: #334155;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
