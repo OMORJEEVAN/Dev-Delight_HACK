@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LostItemCard from "../components/item";
 import MyLostItemCard from "../components/mylostitem";
+import "../css_styling/home.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ function Home() {
   const [myItems, setMyItems] = useState([]);
   const [view, setView] = useState("all");
 
-  // 🔥 NEW: Upload form state
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [uploadData, setUploadData] = useState({
     title: "",
@@ -34,13 +34,11 @@ function Home() {
     "Books",
   ];
 
-  // 🔒 AUTH CHECK
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) navigate("/login");
   }, [navigate]);
 
-  // 🔹 FETCH ALL ITEMS
   useEffect(() => {
     fetch("http://127.0.0.1:8000/items/")
       .then((res) => res.json())
@@ -48,7 +46,6 @@ function Home() {
       .catch((err) => console.error(err));
   }, []);
 
-  // 🔹 FETCH MY ITEMS
   useEffect(() => {
     const fetchMyItems = async () => {
       try {
@@ -74,7 +71,6 @@ function Home() {
     fetchMyItems();
   }, []);
 
-  // 🔹 FILTER
   const normalize = (str) =>
     str?.toLowerCase().replace(/\s+/g, "").trim();
 
@@ -92,7 +88,6 @@ function Home() {
     return matchesCategory && matchesSearch;
   });
 
-  // 🔥 Upload handlers
   const handleUploadChange = (e) => {
     setUploadData({
       ...uploadData,
@@ -111,12 +106,9 @@ function Home() {
     try {
       const formData = new FormData();
 
-      formData.append("title", uploadData.title);
-      formData.append("category", uploadData.category);
-      formData.append("description", uploadData.description);
-      formData.append("status", uploadData.status);
-      formData.append("location", uploadData.location);
-      formData.append("file", uploadData.file);
+      Object.entries(uploadData).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
 
       const res = await fetch("http://127.0.0.1:8000/upload/", {
         method: "POST",
@@ -133,87 +125,70 @@ function Home() {
       setShowUploadForm(false);
 
     } catch (err) {
-      console.error("UPLOAD ERROR:", err);
+      console.error(err);
     }
   };
 
-  // logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/registration";
   };
 
-  const handleDeleteSuccess = (id) => {
-    setMyItems((prev) => prev.filter((item) => item._id !== id));
-  };
-
-  const handleEditSuccess = (id, updatedData) => {
-    setMyItems((prev) =>
-      prev.map((item) =>
-        item._id === id ? { ...item, ...updatedData } : item
-      )
-    );
-  };
-
   return (
-    <div>
-      <div className="logout-btn">
-        <button onClick={handleLogout}>Logout</button>
+    <div className="home-container">
+
+      {/* HEADER */}
+      <div className="home-header">
+        <h1>Lost & Found</h1>
+        <button className="btn-black" onClick={handleLogout}>Logout</button>
       </div>
 
-      <h2>Home</h2>
-
-      {/* 🔍 Search */}
+      {/* SEARCH */}
       <input
+        className="search-bar"
         type="text"
         placeholder="Search lost items..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* 🔥 Toggle */}
-      <div>
-        <button onClick={() => setView("all")}>All Items</button>
-        <button onClick={() => setView("mine")}>My Items</button>
+      {/* TOGGLE */}
+      <div className="toggle">
+        <button
+          className={view === "all" ? "active" : ""}
+          onClick={() => setView("all")}
+        >
+          All Items
+        </button>
+        <button
+          className={view === "mine" ? "active" : ""}
+          onClick={() => setView("mine")}
+        >
+          My Items
+        </button>
       </div>
 
-      {/* 📂 Categories */}
-      <div>
+      {/* CATEGORY */}
+      <div className="categories">
         {categories.map((cat) => (
-          <button key={cat} onClick={() => setSelectedCategory(cat)}>
+          <button
+            key={cat}
+            className={selectedCategory === cat ? "active" : ""}
+            onClick={() => setSelectedCategory(cat)}
+          >
             {cat}
           </button>
         ))}
       </div>
 
-      {/* 📦 Items */}
-      <div>
+      {/* ITEMS */}
+      <div className="items-grid">
         {filteredItems.length > 0 ? (
           filteredItems.map((item) =>
             view === "mine" ? (
-              <MyLostItemCard
-                key={item._id}
-                id={item._id}
-                image={item.image_url}
-                title={item.title}
-                category={item.category}
-                status={item.status}
-                location={item.location}
-                description={item.description}
-                onDeleteSuccess={handleDeleteSuccess}
-                onEditSuccess={handleEditSuccess}
-              />
+              <MyLostItemCard key={item._id} {...item} />
             ) : (
-              <LostItemCard
-                key={item._id}
-                id={item._id}
-                image={item.image_url}
-                title={item.title}
-                category={item.category}
-                status={item.status}
-                location={item.location}
-                description={item.description}
-              />
+              <LostItemCard key={item._id} {...item} />
             )
           )
         ) : (
@@ -221,31 +196,38 @@ function Home() {
         )}
       </div>
 
-      {/* 🔥 Upload Button */}
+      {/* FLOAT BUTTON */}
       {view === "all" && (
-        <div>
-          <button onClick={() => setShowUploadForm(!showUploadForm)}>
-            Upload Lost Item
-          </button>
-        </div>
+        <button
+          className="floating-btn"
+          onClick={() => setShowUploadForm(!showUploadForm)}
+        >
+          +
+        </button>
       )}
 
-      {/* 🔥 Upload Form */}
+      {/* UPLOAD FORM */}
       {showUploadForm && (
-        <div>
-          <input name="title" placeholder="Title" onChange={handleUploadChange} />
-          <input name="category" placeholder="Category" onChange={handleUploadChange} />
-          <input name="description" placeholder="Description" onChange={handleUploadChange} />
+        <div className="upload-modal">
+          <div className="upload-box">
+            <h3>Upload Item</h3>
 
-          <select name="status" onChange={handleUploadChange}>
-            <option value="lost">Lost</option>
-            <option value="found">Found</option>
-          </select>
-          <input name="location" placeholder="Location" onChange={handleUploadChange} />
+            <input name="title" placeholder="Title" onChange={handleUploadChange} />
+            <input name="category" placeholder="Category" onChange={handleUploadChange} />
+            <input name="description" placeholder="Description" onChange={handleUploadChange} />
+            <input name="location" placeholder="Location" onChange={handleUploadChange} />
 
-          <input type="file" onChange={handleFileChange} />
+            <select name="status" onChange={handleUploadChange}>
+              <option value="lost">Lost</option>
+              <option value="found">Found</option>
+            </select>
 
-          <button onClick={handleUpload}>Submit</button>
+            <input type="file" onChange={handleFileChange} />
+
+            <button className="btn-primary" onClick={handleUpload}>
+              Submit
+            </button>
+          </div>
         </div>
       )}
     </div>
