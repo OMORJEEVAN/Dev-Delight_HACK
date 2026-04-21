@@ -1,160 +1,274 @@
-/* ===== NAVBAR ===== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@400;600&display=swap');
+
+/* ─────────────────────────────────────────
+   NAVBAR  —  House Green band
+───────────────────────────────────────── */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;              /* 🔥 FULL WIDTH */
-  height: 60px;
+  width: 100%;
+  height: 64px;
+  padding: 0 32px;
+  box-sizing: border-box;
 
-  padding: 0 30px;          /* 🔥 adjust spacing */
-  box-sizing: border-box;   /* 🔥 prevents overflow */
-
-  background: #000000;
+  background: #1E3932;
   color: white;
 
-  position: fixed;          /* 🔥 stays on top */
+  position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
 
-  z-index: 1000;            /* 🔥 always above content */
-  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08),
+              0 2px 6px rgba(0,0,0,0.06),
+              0 0 1px rgba(0,0,0,0.10);
 }
+
+/* spacer so page content isn't hidden under fixed bar */
 .navbar-fill {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  width: 65%;              /*  MATCH RIGHT PANEL */
-  height: 60px;
-
-  background: #00000000;
+  height: 64px;
+  width: 100%;
 }
 
-/* LOGO */
+/* ─────────────────────────────────────────
+   LEFT  —  brand
+───────────────────────────────────────── */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* small circular logo mark */
+.nav-logo-mark {
+  width: 34px;
+  height: 34px;
+  background: #00754A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .logo {
-  font-size: 22px;
+  font-family: 'Lora', 'Iowan Old Style', Georgia, serif;
+  font-size: 18px;
   font-weight: 600;
-  color: #22c55e; 
+  color: rgba(255,255,255,1);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1;
 }
 
-/* PROFILE WRAPPER */
+.logo-sub {
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  display: block;
+  margin-top: 1px;
+}
+
+/* ─────────────────────────────────────────
+   RIGHT  —  profile button + dropdown
+───────────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
 .profile-wrapper {
   position: relative;
 }
-/* ===== AVATAR CONTAINER ===== */
-.avatar-container {
-  position: relative;   /* IMPORTANT for badge */
-  width: 32px;
-  height: 32px;
+
+/* ── Profile pill button ── */
+.profile-btn {
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 6px 14px 6px 6px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
+  color: rgba(255,255,255,1);
+  cursor: pointer;
+
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-/* PROFILE IMAGE */
+.profile-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.34);
+}
+
+.profile-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── Avatar ── */
+.avatar-container {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
 .avatar-img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;   /*  circle */
+  border-radius: 50%;
   object-fit: cover;
+  border: 1.5px solid rgba(255,255,255,0.30);
 }
 
-/* GREEN DOT */
+/* online dot */
 .status-dot {
-  position: absolute;   /*  floating dot */
-  top: -2px;
-  right: -2px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 
-  background: #22c55e;  /*  green */
-  border: 2px solid #0f172a; /*  match navbar bg */
-
+  background: #00754A;
+  border: 2px solid #1E3932;
   border-radius: 50%;
 }
 
-/* PROFILE TEXT */
 .profile-text {
-  margin-left: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
 }
 
-/* ===== PROFILE BUTTON ===== */
-.profile-btn {
+/* chevron icon */
+.arrow {
   display: flex;
   align-items: center;
-  gap: 8px;
-
-  padding: 8px 16px;
-  border-radius: 999px;
-
-  background: linear-gradient(135deg, #2563eb, #1e40af);
-  color: white;
-  border: none;
-  cursor: pointer;
+  color: rgba(255,255,255,0.60);
+  transition: transform 0.2s ease;
 }
 
-/* ICON */
-.avatar {
-  font-size: 14px;
-}
-.avatar-img {
-  box-shadow: 0 0 10px rgba(34,197,94,0.6);
+.arrow.open {
+  transform: rotate(180deg);
 }
 
-/* ARROW */
-.arrow {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-/* HOVER EFFECT */
-.profile-btn:hover .avatar-img {
-  transform: scale(1.1);
-  transition: 0.2s;
-}
-
-/* ===== DROPDOWN ===== */
+/* ─────────────────────────────────────────
+   DROPDOWN
+───────────────────────────────────────── */
 .dropdown {
   position: absolute;
-  top: 50px;
+  top: calc(100% + 10px);
   right: 0;
 
-  background: rgba(15, 23, 42, 0.7); /*  dropdown bg */
+  background: #ffffff;
   border-radius: 12px;
-  padding: 10px;
+  padding: 6px;
 
   display: flex;
   flex-direction: column;
-  min-width: 180px;
+  min-width: 192px;
 
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 0 0.5px rgba(0,0,0,0.14),
+              0 8px 24px rgba(0,0,0,0.14),
+              0 2px 6px rgba(0,0,0,0.08);
 
-  animation: fadeIn 0.2s ease;
+  animation: dropdown-in 0.18s ease;
 }
 
-/* LINKS */
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Dropdown divider label ── */
+.dropdown-section-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.36);
+  padding: 8px 10px 4px;
+}
+
+/* ── Items ── */
 .dropdown a,
 .dropdown-item {
-  color: white;
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(0,0,0,0.87);
   text-decoration: none;
-  padding: 10px;
+
+  padding: 10px 12px;
   border-radius: 8px;
-  transition: 0.2s;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .dropdown a:hover,
 .dropdown-item:hover {
-  background: #334155;
+  background: #f2f0eb;
 }
 
-/* ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* icon inside dropdown item */
+.dropdown-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #edebe9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #006241;
+}
+
+/* logout — red tint */
+.dropdown-item--logout {
+  color: #c82014;
+}
+
+.dropdown-item--logout .dropdown-icon {
+  background: hsl(4 82% 43% / 8%);
+  color: #c82014;
+}
+
+.dropdown-item--logout:hover {
+  background: hsl(4 82% 43% / 6%);
+}
+
+/* thin divider */
+.dropdown-divider {
+  height: 1px;
+  background: #edebe9;
+  margin: 4px 0;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .navbar { padding: 0 16px; }
+  .logo-sub { display: none; }
+  .profile-text { display: none; }
+  .profile-btn { padding: 6px; }
 }

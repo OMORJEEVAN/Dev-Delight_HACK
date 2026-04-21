@@ -18,12 +18,12 @@ async def upload_image(
         # Upload image to Cloudinary
         result = cloudinary.uploader.upload(file.file)
         image_url = result["secure_url"]
-        public_id = result["public_id"]   # ✅ IMPORTANT
+        public_id = result["public_id"]   #  IMPORTANT
        
         # Create ItemDB object
         item = ItemDB(
             image_url=image_url,
-            public_id=public_id,   # ✅ ADD THIS
+            public_id=public_id,   #  ADD THIS
             title=title,
             category=category,
             status=status,

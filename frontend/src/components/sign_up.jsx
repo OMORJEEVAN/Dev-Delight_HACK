@@ -26,12 +26,12 @@ function Signup() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("Signup successful ✅");
+        setMessage("Signup successful ");
       } else {
-        setMessage(data.detail || "Signup failed ❌");
+        setMessage(data.detail || "Signup failed ");
       }
     } catch (err) {
-      setMessage("Something went wrong ❌");
+      setMessage("Something went wrong ");
     }
   };
 

@@ -4,8 +4,8 @@ from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 import schemas
-from database import users_collection   # ✅ changed
-# import model   ❌ not needed but keeping logic intact
+from database import users_collection   #  changed
+# import model    not needed but keeping logic intact
 
 SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d44396675749244721a2b20e896e11662"
 ALGORITHM = "HS256"
@@ -23,18 +23,18 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-# ✅ replaced db.query with MongoDB
+#  replaced db.query with MongoDB
 async def get_user(username: str):
     user = await users_collection.find_one({"email": username})
     
     if user:
-        user["id"] = str(user["_id"])   # ✅ map Mongo _id → id
+        user["id"] = str(user["_id"])   #  map Mongo _id → id
         return schemas.UserInDB.model_validate(user)
     
     return None
 
 
-# ✅ removed db: Session
+#  removed db: Session
 async def authenticate_user(username: str, password: str):
     user = await get_user(username)
     if not user:
@@ -56,7 +56,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-# ✅ removed db dependency
+#  removed db dependency
 async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     credentials_exception = HTTPException(
@@ -67,7 +67,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
 
-        user_id: str = payload.get("id")   # ✅ get id
+        user_id: str = payload.get("id")   #  get id
         email: str = payload.get("sub")
 
         if user_id is None or email is None:
@@ -81,7 +81,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     if user is None:
         raise credentials_exception
 
-    user["id"] = str(user["_id"])                      # ✅ map Mongo _id → id
+    user["id"] = str(user["_id"])                      #map Mongo _id → id
     return schemas.UserInDB.model_validate(user)       # returns non-Mongo document
 
 

@@ -7,14 +7,14 @@ async def test_connection():
     try:
         client = AsyncIOMotorClient(MONGO_URL)
 
-        # 🔍 Ping MongoDB server
+        # Ping MongoDB server
         result = await client.admin.command("ping")
 
-        print("✅ MongoDB Connected Successfully!")
+        print(" MongoDB Connected Successfully!")
         print("Response:", result)
 
     except Exception as e:
-        print("❌ MongoDB Connection Failed!")
+        print(" MongoDB Connection Failed!")
         print("Error:", e)
 
 # Run the async function

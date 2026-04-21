@@ -11,14 +11,14 @@ cloudinary.config(
 
 async def test_cloudinary():
     try:
-        # 🔍 Fetch account info (no upload)
+        #  Fetch account info (no upload)
         result = cloudinary.api.ping()
 
-        print("✅ Cloudinary Connected Successfully!")
+        print(" Cloudinary Connected Successfully!")
         print("Response:", result)
 
     except Exception as e:
-        print("❌ Cloudinary Connection Failed!")
+        print(" Cloudinary Connection Failed!")
         print("Error:", e)
 
 # Run async function

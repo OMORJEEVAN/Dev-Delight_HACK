@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+.lc-card {
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 0.5px rgba(0,0,0,0.14), 0 1px 1px rgba(0,0,0,0.24);
+  overflow: hidden;
+  max-width: 360px;
+  width: 100%;
+  transition: box-shadow 0.2s ease;
+  letter-spacing: -0.01em;
+}
+
+.lc-card:hover {
+  box-shadow: 0 0 0.5px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.14);
+}
+
+/* ── Image ── */
+.lc-card__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f2f0eb;
+  overflow: hidden;
+}
+
+.lc-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.lc-card__image.loaded {
+  opacity: 1;
+}
+
+.lc-card__image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0,0,0,0.24);
+}
+
+.lc-card__status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lc-card__status-badge--lost {
+  background: #c82014;
+  color: #fff;
+}
+
+.lc-card__status-badge--found {
+  background: #006241;
+  color: #fff;
+}
+
+/* ── Body ── */
+.lc-card__body {
+  padding: 20px 20px 0;
+}
+
+.lc-card__category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #00754A;
+  margin: 0 0 6px;
+}
+
+.lc-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(0,0,0,0.87);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.lc-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.58);
+  margin: 0 0 4px;
+}
+
+.lc-card__meta svg {
+  flex-shrink: 0;
+}
+
+.lc-card__description {
+  font-size: 14px;
+  color: rgba(0,0,0,0.58);
+  line-height: 1.55;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid #edebe9;
+}
+
+/* ── Actions ── */
+.lc-card__actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px 20px;
+}
+
+.lc-btn {
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.18s ease;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.lc-btn:active {
+  transform: scale(0.95);
+}
+
+.lc-btn--primary {
+  background: #00754A;
+  color: #fff;
+  flex: 1;
+  justify-content: center;
+}
+
+.lc-btn--primary:hover {
+  background: #006241;
+}
+
+.lc-btn--danger {
+  background: transparent;
+  color: #c82014;
+  border: 1.5px solid #c82014;
+  padding: 6.5px 18px;
+}
+
+.lc-btn--danger:hover {
+  background: hsl(4 82% 43% / 6%);
+}
+
+/* ── Edit Form ── */
+.lc-edit-form {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid #edebe9;
+  animation: lc-slide-down 0.2s ease;
+}
+
+@keyframes lc-slide-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lc-edit-form__heading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #006241;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 16px 0 2px;
+}
+
+.lc-field {
+  position: relative;
+}
+
+.lc-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.58);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.lc-field input,
+.lc-field select,
+.lc-field textarea {
+  font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.87);
+  background: #f2f0eb;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 9px 13px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  letter-spacing: -0.01em;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lc-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.lc-field input:focus,
+.lc-field select:focus,
+.lc-field textarea:focus {
+  border-color: #00754A;
+  background: #fff;
+}
+
+.lc-select-wrap {
+  position: relative;
+}
+
+.lc-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(0,0,0,0.58);
+  pointer-events: none;
+}
+
+.lc-edit-form__actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.lc-btn--save {
+  background: #006241;
+  color: #fff;
+  flex: 1;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.lc-btn--save:hover {
+  background: #004f35;
+}
+
+.lc-btn--cancel {
+  background: transparent;
+  color: rgba(0,0,0,0.58);
+  border: 1.5px solid #d6dbde;
+  padding: 8.5px 18px;
+}
+
+.lc-btn--cancel:hover {
+  background: #f2f0eb;
+}

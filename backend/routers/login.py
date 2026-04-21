@@ -8,18 +8,23 @@ router = APIRouter(tags=["registration"])
 @router.post("/login")
 async def login(request: Signup):
 
-    # 🔍 Find user
+    # Find user
     user = await users_collection.find_one({"email": request.email})
 
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # 🔐 Check password
+    # Check password
     if not verify_password(request.password, user["password"]):
         raise HTTPException(status_code=401, detail="Incorrect password")
 
-    # 🎟 Create JWT token
-    token = create_access_token(data={"sub": user["email"]})
+    # Create JWT token
+    token = create_access_token(
+    data={
+        "sub": user["email"],
+        "id": str(user["_id"])   #  ADD THIS LINE
+    }
+) 
 
     return {
         "access_token": token,

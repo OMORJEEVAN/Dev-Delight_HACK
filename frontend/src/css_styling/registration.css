@@ -54,7 +54,7 @@
   border-radius: 8px;
   margin-bottom: 20px;
 
-  text-align: center;   /* 🔥 THIS centers the text */
+  text-align: center;   /*THIS centers the text */
 }
 
 /* ===== SOCIAL BUTTONS ===== */
@@ -117,18 +117,18 @@
   font-size: 14px;
   background: #fafafa;
 
-  transition: 0.2s;
+  color: #000;             
 }
 
 .form-input:focus {
-  border-color: #1a73e8; /* 🔥 FOCUS COLOR */
+  border-color: #1a73e8; /* FOCUS COLOR */
   background: white;
   box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
 }
 
 /* ===== BUTTON ===== */
 .form-btn {
-  width: 30%;              /* 🔥 control size */
+  width: 30%;              /* control size */
   padding: 15px;
 
   display: ruby-base;          /* required for centering */
@@ -151,14 +151,14 @@
 
 /* ===== RIGHT PANEL ===== */
 .registration-right {
-  width: 70%;              /* 🔥 fills rest EXACTLY */
+  width: 70%;              /* fills rest EXACTLY */
   background: #130c0c00;
 
   display: none;
   align-items: center;
   justify-content: center;
 
-  overflow: hidden;        /* 🔥 removes right gap */
+  overflow: hidden;        /*removes right gap */
 }
 
 .registration-image {

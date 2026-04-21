@@ -22,7 +22,7 @@ function Login() {
     if (res.ok) {
       console.log("Login success ", data);
 
-      // 🔥 FIX: store token here
+      //  FIX: store token here
       localStorage.setItem("token", data.access_token);
 
       console.log("Stored:", localStorage.getItem("token"));

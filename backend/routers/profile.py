@@ -14,7 +14,6 @@ async def create_profile(
     current_user: dict = Depends(get_current_user)
 ):
     try:
-        # 🔥 check if profile already exists
         existing = await profliles_collection.find_one(
             {"user_id": current_user.id}
         )
@@ -23,7 +22,7 @@ async def create_profile(
             raise HTTPException(status_code=400, detail="Profile already exists")
 
         new_profile = {
-            "user_id": current_user.id,   # ✅ IMPORTANT FIX
+            "user_id": current_user.id,  
             "Name": request.Name,
             "Institute": request.Institute,
             "Hostle": request.Hostle,
@@ -107,12 +106,12 @@ async def upload_image(
         # Upload image to Cloudinary
         result = cloudinary.uploader.upload(file.file)
         image_url = result["secure_url"]
-        public_id = result["public_id"]   # ✅ IMPORTANT
+        public_id = result["public_id"]   #  IMPORTANT
        
         # Create ItemDB object
         item = ItemUpdate(
             image_url=image_url,
-            public_id=public_id,   # ✅ ADD THIS
+            public_id=public_id,   # ADD THIS
             title=title,
             category=category,
             status=status,
@@ -136,10 +135,10 @@ async def upload_image(
 @router.get("/profile/your_lost_item/all")
 async def get_your_lost_items():
     try:
-        # ✅ Fetch all items (async)
+        #  Fetch all items (async)
         items = await my_lost_items_collection.find().to_list(100)
 
-        # ✅ Convert ObjectId → string
+        # Convert ObjectId → string
         for item in items:
             item["_id"] = str(item["_id"])
 
@@ -149,7 +148,7 @@ async def get_your_lost_items():
         raise HTTPException(status_code=500, detail=str(e))
     
 
-# 🗑️ DELETE ITEM
+#  DELETE ITEM
 @router.delete("/items/your_lost_items/delete/{item_id}")
 async def delete_item(item_id: str, current_user=Depends(get_current_user)):
     try:
@@ -161,19 +160,19 @@ async def delete_item(item_id: str, current_user=Depends(get_current_user)):
         if not item:
             raise HTTPException(status_code=404, detail="Item not found")
 
-        # ⚠️ Check user_id exists
+        #  Check user_id exists
         if "user_id" not in item:
             raise HTTPException(status_code=400, detail="Invalid item data (missing user_id)")
 
-        # 🔐 Owner check
-        if item["user_id"] != current_user.id:         #✅ FIXED: str() removed
+        #  Owner check
+        if item["user_id"] != current_user.id:         # FIXED: str() removed
             raise HTTPException(status_code=403, detail="Not authorized")
 
-        # 🗑️ Delete image from Cloudinary
+        #  Delete image from Cloudinary
         if "public_id" in item:
             destroy(item["public_id"])
 
-        # 🗑️ Delete from DB
+        #  Delete from DB
         await my_lost_items_collection.delete_one({
             "_id": ObjectId(item_id)
         })
@@ -184,7 +183,7 @@ async def delete_item(item_id: str, current_user=Depends(get_current_user)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# ✏️ UPDATE ITEM (FORM VERSION)
+#  UPDATE ITEM (FORM VERSION)
 @router.put("/items/your_lost_items/update/{item_id}")
 async def update_item(
     item_id: str,
@@ -197,7 +196,7 @@ async def update_item(
     current_user=Depends(get_current_user)
 ):
     try:
-        # 🔍 Find item
+        #  Find item
         item = await my_lost_items_collection.find_one({
             "_id": ObjectId(item_id)
         })
@@ -205,15 +204,15 @@ async def update_item(
         if not item:
             raise HTTPException(status_code=404, detail="Item not found")
 
-        # ⚠️ Check user_id exists
+        #  Check user_id exists
         if "user_id" not in item:
             raise HTTPException(status_code=400, detail="Invalid item data (missing user_id)")
 
-        # 🔐 Owner check
+        #  Owner check
         if item["user_id"] != current_user.id:
             raise HTTPException(status_code=403, detail="Not authorized")
 
-        # 🧠 Build update dict dynamically
+        #  Build update dict dynamically
         updated_data = {}
 
         if title is not None:
@@ -229,7 +228,7 @@ async def update_item(
         if owner_contact_number is not None:
             updated_data["owner_contact_number"] = owner_contact_number
 
-        # 📝 Update item
+        #  Update item
         await my_lost_items_collection.update_one(
             {"_id": ObjectId(item_id)},
             {"$set": updated_data}
