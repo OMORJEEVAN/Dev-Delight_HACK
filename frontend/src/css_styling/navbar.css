@@ -132,16 +132,18 @@
 }
 
 /* LINKS */
-.dropdown a {
+.dropdown a,
+.dropdown-item {
   color: white;
   text-decoration: none;
   padding: 10px;
-
   border-radius: 8px;
   transition: 0.2s;
+  cursor: pointer;
 }
 
-.dropdown a:hover {
+.dropdown a:hover,
+.dropdown-item:hover {
   background: #334155;
 }
 

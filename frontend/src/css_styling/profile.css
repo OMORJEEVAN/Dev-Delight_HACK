@@ -1,0 +1,50 @@
+.profile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 9998;
+}
+
+.profile-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100vh;
+
+  background: #fff;
+  box-shadow: -10px 0 25px rgba(0,0,0,0.2);
+
+  transition: 0.3s ease;
+  z-index: 9999;
+
+  overflow-y: auto;
+}
+
+.profile-panel.open {
+  right: 0;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #006241;
+  color: white;
+}
+
+.profile-content {
+  padding: 20px;
+}

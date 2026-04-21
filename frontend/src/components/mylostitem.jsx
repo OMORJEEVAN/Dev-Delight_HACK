@@ -12,7 +12,6 @@ function MyLostItemCard({
   onEditSuccess
 }) {
 
-  // 🔥 NEW: toggle + form state
   const [showEditForm, setShowEditForm] = useState(false);
   const [editData, setEditData] = useState({
     title: title,
@@ -54,8 +53,6 @@ function MyLostItemCard({
       console.error("DELETE ERROR:", err);
     }
   };
-
-  // 🔥 UPDATED: now uses FormData (backend expects Form)
   const handleEdit = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -77,7 +74,7 @@ function MyLostItemCard({
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${token}`   // ❗ no Content-Type
+            Authorization: `Bearer ${token}`   
           },
           body: formData
         }
@@ -96,7 +93,7 @@ function MyLostItemCard({
     }
   };
 
-  // 🔥 NEW: handle input change
+
   const handleChange = (e) => {
     setEditData({
       ...editData,
@@ -118,7 +115,6 @@ function MyLostItemCard({
       </button>
       <button onClick={handleDelete}>Delete</button>
 
-      {/* 🔥 NEW EDIT FORM */}
       {showEditForm && (
         <div>
           <input
