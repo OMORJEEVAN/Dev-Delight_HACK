@@ -14,7 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Routers
-from routers import login,singup,upload,get_db_image,profile
+from routers import login,singup,upload,get_db_image,profile,recommendation
 
 app.include_router(singup.router)
 app.include_router(login.router)
@@ -22,3 +22,4 @@ app.include_router(authentication.router)
 app.include_router(upload.router)
 app.include_router(get_db_image.router)
 app.include_router(profile.router)
+app.include_router(recommendation.router)

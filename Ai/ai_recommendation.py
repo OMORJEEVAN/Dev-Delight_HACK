@@ -1,61 +1,53 @@
-# ai_recommendation.py
-
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load model once (IMPORTANT for performance)
+# Load once
 model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# SCORE THRESHOLD
+MIN_SCORE = 0.3
 
 
 def create_text(data):
-    """
-    Combine all fields into one text string
-    """
-    title = data.get("title", "")
-    description = data.get("description", "")
-    category = data.get("category", "")
-    location = data.get("location", "")
-
-    return f"{title} {description} {category} {location}"
+    return f"{data.get('title','')} {data.get('description','')} {data.get('category','')} {data.get('location','')}"
 
 
-def compute_similarity(query_text, item_text):
-    """
-    Convert text to embeddings and compute similarity
-    """
-    query_embedding = model.encode(query_text)
-    item_embedding = model.encode(item_text)
-
-    score = cosine_similarity([query_embedding], [item_embedding])[0][0]
-    return score
-
-
-def get_recommendations(my_item, items_collection, top_k=5):
-    """
-    Main AI function
-
-    my_item → data from my_lost_items
-    items_collection → list of items from DB
-    """
+def get_recommendations(my_item, items_list, top_k=5):
 
     query_text = create_text(my_item)
 
-    results = []
+    # Encode query ONCE
+    query_embedding = model.encode(query_text,convert_to_numpy=True, show_progress_bar=False)
 
-    for item in items_collection:
+    filtered_items = []
+    item_texts = []
 
-        # Only match with LOST/FOUND depending on your logic
-        if item.get("status") != "lost":
+    # Filter only FOUND items
+    for item in items_list:
+        if item.get("status") != "found":
             continue
 
-        item_text = create_text(item)
+        filtered_items.append(item)
+        item_texts.append(create_text(item))
 
-        text_score = compute_similarity(query_text, item_text)
+    if not filtered_items:
+        return []
 
-        # BONUS scoring
+    # Batch encode ALL items (FAST)
+    item_embeddings = model.encode(item_texts)
+
+    # Compute similarity in ONE GO
+    similarities = cosine_similarity([query_embedding], item_embeddings)[0]
+
+    results = []
+
+    for i, item in enumerate(filtered_items):
+
+        text_score = similarities[i]
+
         category_match = 1 if item.get("category") == my_item.get("category") else 0
 
-        location_match = 1 if my_item.get("location", "").lower() in item.get("location", "").lower() else 0
+        location_match = 1 if my_item.get("location","").lower() in item.get("location","").lower() else 0
 
         final_score = (
             0.6 * text_score +
@@ -63,12 +55,14 @@ def get_recommendations(my_item, items_collection, top_k=5):
             0.15 * location_match
         )
 
-        results.append({
-            "item": item,
-            "score": float(final_score)
-        })
+        #APPLY THRESHOLD
+        if final_score >= MIN_SCORE:
+            results.append({
+                "item": item,
+                "score": float(final_score)
+            })
 
-    # Sort by score
+    #  Sort
     results = sorted(results, key=lambda x: x["score"], reverse=True)
 
     return results[:top_k]
