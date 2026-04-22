@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "../components/log_in";
 import Signup from "../components/sign_up";
 import "../css_styling/registration.css";
-import hero from "../assets/hero.png";
+import signupImg from "../assets/login.svg";
 
 function Registration() {
   const [isSignup, setIsSignup] = useState(false);
@@ -39,7 +39,7 @@ function Registration() {
 
       {/* RIGHT */}
       <div className="registration-right">
-        <img src={hero} alt="hero" className="registration-image" />
+        <img src={signupImg} alt="signup" className="registration-image" />
       </div>
 
     </div>

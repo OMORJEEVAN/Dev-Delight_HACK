@@ -3,10 +3,29 @@ import { useNavigate } from "react-router-dom";
 import LostItemCard from "../components/item";
 import MyLostItemCard from "../components/mylostitem";
 import "../css_styling/home.css";
+import heroImg from "../assets/navbar.svg";
 
 const categories = [
-  "All", "Electronics", "Stationary", "Garments",
-  "ID Cards", "Shoes", "Bicycle", "Books",
+  "All",
+  "ID Cards",
+  "Wallets",
+  "Keys",
+  "Electronics",
+  "Mobile Phones",
+  "Laptops",
+  "Chargers",
+  "Earphones",
+  "Bags",
+  "Garments",
+  "Shoes",
+  "Books",
+  "Stationery",
+  "Bicycle",
+  "Umbrella",
+  "Water Bottles",
+  "Accessories",
+  "Documents",
+  "Others"
 ];
 
 function Home() {
@@ -92,9 +111,21 @@ function Home() {
 
       {/* ── HERO BAND ── */}
       <div className="home-hero">
-        <p className="home-hero__eyebrow">Community Board</p>
-        <h1 className="home-hero__heading">Find what's yours.<br/>Return what's theirs.</h1>
-        <p className="home-hero__sub">Browse lost &amp; found items reported across campus.</p>
+  
+        <div className="home-hero-left">
+          <p className="home-hero__eyebrow">Community Board</p>
+          <h1 className="home-hero__heading">
+            Find what's yours.<br/>Return what's theirs.
+          </h1>
+          <p className="home-hero__sub">
+            Browse lost &amp; found items reported across campus.
+          </p>
+        </div>
+
+        <div className="home-hero-right">
+          <img src={heroImg} alt="illustration" />
+        </div>
+
       </div>
 
       {/* ── SEARCH ── */}
@@ -116,22 +147,30 @@ function Home() {
 
       {/* ── TOGGLE ── */}
       <div className="home-toggle-zone">
-        <div className="home-toggle">
+        
+        <div className={`home-toggle ${view === "mine" ? "mine" : ""}`}>
+          
           <button
             className={`home-toggle__btn${view === "all" ? " active" : ""}`}
             onClick={() => setView("all")}
           >
-            All Items
+          Found Items
           </button>
+
           <button
             className={`home-toggle__btn${view === "mine" ? " active" : ""}`}
             onClick={() => setView("mine")}
           >
-            My Items
+          Lost Reports
           </button>
+
         </div>
-        <span className="home-count-badge">{filteredItems.length} results</span>
-      </div>
+
+  <span className="home-count-badge">
+    {filteredItems.length} results
+  </span>
+
+</div>
 
       {/* ── CATEGORIES ── */}
       <div className="home-categories-zone">
@@ -150,7 +189,7 @@ function Home() {
 
       {/* ── SECTION LABEL ── */}
       <div className="home-section-label">
-        <h2>{view === "all" ? "All Items" : "My Reports"}</h2>
+        <h2>{view === "all" ? "Items" : "Reports"}</h2>
         <span>{selectedCategory !== "All" && `· ${selectedCategory}`}</span>
       </div>
 

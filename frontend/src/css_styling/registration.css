@@ -154,7 +154,7 @@
   width: 70%;              /* fills rest EXACTLY */
   background: #130c0c00;
 
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 
