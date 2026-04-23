@@ -41,7 +41,7 @@ function Home({ view, setView }) {
     location: "", status: "lost", file: null,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 1;
+  const itemsPerPage = 10;   /*pagination*/
 
   /* ── Auth guard ── */
   useEffect(() => {
