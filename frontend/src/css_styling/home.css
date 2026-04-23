@@ -673,6 +673,148 @@ body {
 .home-btn--ghost:hover { background: var(--canvas); }
 
 /* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.home-footer {
+  background: var(--green-house);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 40px 20px;
+  text-align: center;
+  transition: background 0.5s ease;
+}
+
+.home-footer-logo {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.home-footer-tagline {
+  font-size: 14px;
+  color: var(--text-white-soft);
+}
+
+/*LOST MODE (RED) */
+.home-content.lost-mode .home-footer {
+  background: #4c1010;
+}
+
+/*footer */
+/* smooth transition */
+.about-footer {
+  transition: background 0.5s ease;
+}
+
+/*red mode */
+.home-content.lost-mode .about-footer {
+  background: #4c1010;
+}
+
+/* TEAM SECTION */
+.footer-team {
+  margin-top: 20px;
+}
+
+.footer-team-title {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 10px;
+}
+
+/* SOCIAL ICONS */
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.footer-socials a {
+  color: white;
+  opacity: 0.8;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-socials a:hover {
+  opacity: 1;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.footer-socials a svg {
+  fill: currentColor;
+}
+.footer-socials a.youtube svg {
+  transform: translateY(5px);
+}
+
+.footer-socials a:nth-child(1):hover { color: #fff; }       /* GitHub */
+.footer-socials a:nth-child(2):hover { color: #0A66C2; }    /* LinkedIn */
+.footer-socials a:nth-child(3):hover { color: #FF0000; }    /* YouTube */
+
+/* ───────── PAGINATION ───────── */
+.home-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.home-pagination button {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+
+  border-radius: 50px;
+  border: none;
+
+  cursor: pointer;
+
+  background: #e5e5e5;
+  color: #333;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.25s ease;
+}
+
+/*ACTIVE PAGE */
+.home-pagination button.active {
+  background: #00754A;
+  color: white;
+  font-weight: 600;
+}
+
+/* LOST MODE ACTIVE */
+.home-content.lost-mode .home-pagination button.active {
+  background: #530c07;
+}
+
+/* HOVER (same feel as active but lighter) */
+.home-pagination button:hover:not(:disabled) {
+  background: #00754A;
+  color: white;
+}
+
+/*LOST MODE HOVER */
+.home-content.lost-mode .home-pagination button:hover:not(:disabled) {
+  background: #c82014;
+}
+
+/* DISABLED */
+.home-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #dcdcdc;
+}
+/* ─────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────── */
 @media (max-width: 768px) {

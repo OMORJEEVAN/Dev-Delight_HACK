@@ -19,11 +19,9 @@ function Navbar({ view }) {   //  ONLY CHANGE: accept view as prop
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  console.log("Navbar view:", view);
-
   return (
     <>
-      {/* ✅ ONLY CHANGE: dynamic class */}
+      {/* ONLY CHANGE: dynamic class */}
       <div className={`navbar ${view === "mine" ? "navbar--lost" : "navbar--found"}`}>
 
         {/* ── BRAND ── */}
@@ -86,7 +84,7 @@ function Navbar({ view }) {   //  ONLY CHANGE: accept view as prop
                 </div>
 
                 {/* Home */}
-                <Link to="/" onClick={() => setOpen(false)} className="dropdown-item" style={{ textDecoration: "none" }}>
+                <Link to="/home" onClick={() => setOpen(false)} className="dropdown-item" style={{ textDecoration: "none" }}>
                   <span className="dropdown-icon">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                       <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
