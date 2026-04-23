@@ -13,7 +13,7 @@
   padding: 0 32px;
   box-sizing: border-box;
 
-  background: #1E3932;
+  /*  REMOVED fixed background from here */
   color: white;
 
   position: fixed;
@@ -21,9 +21,22 @@
   left: 0;
   z-index: 1000;
 
+  /* smooth transition */
+  transition: background 0.5s ease;
+
   box-shadow: 0 1px 3px rgba(0,0,0,0.08),
               0 2px 6px rgba(0,0,0,0.06),
               0 0 1px rgba(0,0,0,0.10);
+}
+
+/* DEFAULT GREEN */
+.navbar--found {
+  background: #041913;
+}
+
+/* LOST = RED */
+.navbar--lost {
+  background: #2b0303;
 }
 
 /* spacer so page content isn't hidden under fixed bar */
@@ -51,6 +64,11 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background 0.5s ease;
+}
+
+.navbar--lost .nav-logo-mark {
+  background: #c82014;;
 }
 
 .logo {
@@ -106,7 +124,7 @@
   color: rgba(255,255,255,1);
   cursor: pointer;
 
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background 0.5s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .profile-btn:hover {

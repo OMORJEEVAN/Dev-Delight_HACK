@@ -28,14 +28,13 @@ const categories = [
   "Others"
 ];
 
-function Home() {
+function Home({ view, setView }) {
   const navigate = useNavigate();
 
   const [search, setSearch]                   = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [items, setItems]                     = useState([]);
   const [myItems, setMyItems]                 = useState([]);
-  const [view, setView]                       = useState("all");
   const [showUploadForm, setShowUploadForm]   = useState(false);
   const [uploadData, setUploadData]           = useState({
     title: "", category: "", description: "",
@@ -107,10 +106,10 @@ function Home() {
     } catch (err) { console.error(err); }
   };
   return (
-    <div className="home-container">
+    <div className={`home-content ${view === "mine" ? "lost-mode" : ""}`}>
 
       {/* ── HERO BAND ── */}
-      <div className="home-hero">
+      <div className={`home-hero ${view === "mine" ? "lost-mode" : ""}`}>
   
         <div className="home-hero-left">
           <p className="home-hero__eyebrow">Community Board</p>

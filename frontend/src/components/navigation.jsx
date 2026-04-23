@@ -4,7 +4,7 @@ import "../css_styling/navbar.css";
 import profileImg from "../assets/pp.png";
 import Profile from "./profile";
 
-function Navbar() {
+function Navbar({ view }) {   //  ONLY CHANGE: accept view as prop
   const [open, setOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const dropdownRef = useRef();
@@ -19,9 +19,12 @@ function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  console.log("Navbar view:", view);
+
   return (
     <>
-      <div className="navbar">
+      {/* ✅ ONLY CHANGE: dynamic class */}
+      <div className={`navbar ${view === "mine" ? "navbar--lost" : "navbar--found"}`}>
 
         {/* ── BRAND ── */}
         <div className="nav-left">
@@ -113,10 +116,8 @@ function Navbar() {
 
       </div>
 
-      {/* spacer */}
       <div className="navbar-fill" />
 
-      {/* floating profile panel */}
       <Profile isOpen={showProfile} onClose={() => setShowProfile(false)} />
     </>
   );

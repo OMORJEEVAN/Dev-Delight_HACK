@@ -140,6 +140,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 0.5s ease;
 }
 
 .home-hero-left {
@@ -147,7 +148,7 @@ body {
 }
 
 .home-hero-right {
-  margin-right: 200px;   /* 👈 move image toward center */
+  margin-right: 200px;   /*move image toward center */
 }
 
 .home-hero-right img {
@@ -177,6 +178,11 @@ body {
   font-size: 14px;
   color: var(--text-white-soft);
   line-height: 1.5;
+}
+
+.home-hero.lost-mode {
+  background: #4c1010; /* nice red */
+  border-bottom: 1px solid #7f1d1d;
 }
 
 /* ─────────────────────────────────────────
@@ -305,6 +311,10 @@ body {
   margin-left: 8px;
 }
 
+.home-toggle.mine::before {
+  transform: translateX(100%);
+  background: #990b0b; /* red for lost */
+}
 /* ─────────────────────────────────────────
    CATEGORY PILLS
 ───────────────────────────────────────── */
@@ -462,6 +472,35 @@ body {
   padding: 20px;
   animation: overlay-in 0.18s ease;
 }
+.home-content.lost-mode .home-cat-btn.active {
+  background: #b91c1c;   /* red */
+  color: #fff;
+}
+
+.home-content.lost-mode .home-cat-btn:hover {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+/* ACTIVE CATEGORY IN LOST MODE */
+.home-content.lost-mode .home-cat-btn.active {
+  background: #b91c1c;
+  color: #fff;
+  border: 1.5px solid #7f1d1d; /* darker red border */
+}
+
+/* ALL CATEGORY BUTTONS IN LOST MODE */
+.home-content.lost-mode .home-cat-btn {
+  border: 1.5px solid #fecaca;  /* light red instead of green */
+  color: #7f1d1d;
+}
+
+/* RESULT COUNT BADGE */
+.home-content.lost-mode .home-count-badge {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
 
 @keyframes overlay-in {
   from { opacity: 0; }
