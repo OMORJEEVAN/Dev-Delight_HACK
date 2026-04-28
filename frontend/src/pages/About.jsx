@@ -158,9 +158,7 @@ function About() {
         </p>
 
         <div className="hero-scroll-hint fade-up">
-          <span className="scroll-dot" />
-          <span className="scroll-dot" />
-          <span className="scroll-dot" />
+          
         </div>
       </section>
 
@@ -343,12 +341,7 @@ function About() {
           </button>
         </div>
       </section>
-
-      {/* ── FOOTER ── */}
-      <footer className="about-footer">
-        <div className="footer-logo">LOST&amp;FOUND</div>
-        <p className="footer-tagline">Built for campuses. Powered by community.</p>
-      </footer>
+      
     </div>
   );
 }
