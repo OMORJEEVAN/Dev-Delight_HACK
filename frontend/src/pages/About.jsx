@@ -10,8 +10,16 @@ function About() {
   const mouseRef = useRef({ x: 0, y: 0 });
   const targetRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef(null);
-
+  function scrollToNextSection() {
+    const nextSection = document.querySelector(".problem-band");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }
   /* ── Canvas interactive rings ── */
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -42,11 +50,11 @@ function About() {
 
     // Ring config
     const RINGS = [
-      { r: 120,  opacity: 0.95, color: "212,233,226", lw: 2.0, phase: 0,    dot: null },
-      { r: 230, opacity: 0.80, color: "203,162,88",  lw: 1.6, phase: 1.2,  dot: { color: "#cba258", size: 7, speed: 0.018 } },
-      { r: 370, opacity: 0.60, color: "212,233,226",  lw: 1.3, phase: 2.4,  dot: { color: "#d4e9e2", size: 6, speed: -0.011 } },
-      { r: 540, opacity: 0.38, color: "212,233,226",  lw: 1.0, phase: 3.6,  dot: null },
-      { r: 740, opacity: 0.20, color: "212,233,226",  lw: 0.7, phase: 4.8,  dot: null },
+      { r: 120, opacity: 0.95, color: "212,233,226", lw: 2.0, phase: 0, dot: null },
+      { r: 230, opacity: 0.80, color: "203,162,88", lw: 1.6, phase: 1.2, dot: { color: "#cba258", size: 7, speed: 0.018 } },
+      { r: 370, opacity: 0.60, color: "212,233,226", lw: 1.3, phase: 2.4, dot: { color: "#d4e9e2", size: 6, speed: -0.011 } },
+      { r: 540, opacity: 0.38, color: "212,233,226", lw: 1.0, phase: 3.6, dot: null },
+      { r: 740, opacity: 0.20, color: "212,233,226", lw: 0.7, phase: 4.8, dot: null },
     ];
 
     let angles = RINGS.map((r) => r.phase);
@@ -57,8 +65,8 @@ function About() {
       const H = canvas.height;
 
       // smooth lerp toward mouse
-      const lx = mouseRef.current.x + (targetRef.current.x - mouseRef.current.x) * 0.0009;
-      const ly = mouseRef.current.y + (targetRef.current.y - mouseRef.current.y) * 0.0009;
+      const lx = mouseRef.current.x + (targetRef.current.x - mouseRef.current.x) * 0.009;
+      const ly = (mouseRef.current.y > window.innerHeight ? window.innerHeight : mouseRef.current.y) + (targetRef.current.y - mouseRef.current.y) * 0.009;
       mouseRef.current = { x: lx, y: ly };
 
       ctx.clearRect(0, 0, W, H);
@@ -137,10 +145,10 @@ function About() {
   }, []);
 
   return (
-    <div className="about-root">
+    <div className="about-root" style={{ userSelect: 'none' }}>
 
       {/* ── HERO ── */}
-      <section className="hero-band">
+      <section className="hero-band" style={{ height: "400px" }}>
         <canvas ref={canvasRef} className="hero-canvas" />
         <div className="hero-noise" />
 
@@ -158,7 +166,9 @@ function About() {
         </p>
 
         <div className="hero-scroll-hint fade-up">
-          
+          <div className="arrowkl-container">
+            <span onClick={scrollToNextSection}><div className="arrowkl"></div></span>
+          </div>
         </div>
       </section>
 
@@ -207,9 +217,9 @@ function About() {
 
           <div className="feature-grid">
             <div className="feature-card fade-up">
-                <div className="feature-icon">
-                    <img src={foundIcon} alt="found" />
-                </div>
+              <div className="feature-icon">
+                <img src={foundIcon} alt="found" />
+              </div>
               <h3 className="feature-heading">Found Board</h3>
               <p className="feature-text">
                 Spotted something lying around? Post it here. Your find gets
@@ -334,14 +344,14 @@ function About() {
           </p>
           <button
             className="cta-btn fade-up"
-            onClick={() => navigate("/registration")}
+            onClick={() => (navigate("/registration"), scrollToTop())}
           >
             Let's Get Started
             <span className="cta-arrow">→</span>
           </button>
         </div>
       </section>
-      
+
     </div>
   );
 }
