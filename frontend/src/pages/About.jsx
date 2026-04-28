@@ -344,7 +344,7 @@ function About() {
           </p>
           <button
             className="cta-btn fade-up"
-            onClick={() => (navigate("/registration"), scrollToTop())}
+            onClick={() => (navigate("/registration"), document.body.scrollTo({ top: 0}))}
           >
             Let's Get Started
             <span className="cta-arrow">→</span>
