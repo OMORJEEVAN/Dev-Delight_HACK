@@ -334,47 +334,6 @@ function Home({ view, setView }) {
           </button>
 
         </div>
-
-      {/* ── FOOTER ── */}
-      <footer className={`about-footer ${view === "mine" ? "lost-mode" : ""}`}>
-
-        <div className="footer-logo">LOST&amp;FOUND</div>
-        <p className="footer-tagline">
-          Built for campuses. Powered by community.
-        </p>
-
-        {/* ── TEAM / SOCIAL ── */}
-        <div className="footer-team">
-
-          <p className="footer-team-title">Built by Your Team</p>
-
-          <div className="footer-socials">
-
-            {/* GitHub */}
-            <a className="github" href="https://github.com/OMORJEEVAN" target="_blank" rel="noreferrer">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.2 11.38c.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.6-4.04-1.6a3.18 3.18 0 00-1.34-1.75c-1.1-.76.08-.74.08-.74a2.52 2.52 0 011.84 1.24 2.56 2.56 0 003.5 1 2.56 2.56 0 01.76-1.6c-2.66-.3-5.47-1.34-5.47-5.94a4.66 4.66 0 011.24-3.24 4.34 4.34 0 01.12-3.2s1-.32 3.3 1.24a11.5 11.5 0 016 0c2.3-1.56 3.3-1.24 3.3-1.24a4.34 4.34 0 01.12 3.2 4.66 4.66 0 011.24 3.24c0 4.62-2.82 5.64-5.5 5.94a2.87 2.87 0 01.82 2.22v3.3c0 .32.22.7.82.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-            </a>
-
-            {/* LinkedIn */}
-            <a className="linkedin" href="https://www.linkedin.com/in/anish-saha-27550839b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M4.98 3.5C4.98 5 3.86 6.1 2.5 6.1S0 5 0 3.5 1.12.9 2.5.9 4.98 2 4.98 3.5zM.3 8.4h4.4V24H.3zM8.4 8.4h4.2v2.1h.06c.58-1.1 2-2.3 4.1-2.3 4.4 0 5.2 2.9 5.2 6.6V24h-4.4v-7.6c0-1.8-.03-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.7H8.4z"/>
-              </svg>
-            </a>
-
-            {/* YouTube */}
-            <a className="youtube" href="https://www.youtube.com/@ZENOX_1613" target="_blank" rel="noreferrer">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.5 6.2s-.23-1.64-.94-2.36c-.9-.94-1.9-.95-2.36-1C16.7 2.5 12 2.5 12 2.5h0s-4.7 0-8.2.34c-.47.05-1.46.06-2.36 1C.73 4.56.5 6.2.5 6.2S.25 8.1.25 10v1.9c0 1.9.25 3.8.25 3.8s.23 1.64.94 2.36c.9.94 2.08.91 2.6 1 1.9.18 8 .34 8 .34s4.7 0 8.2-.34c.47-.05 1.46-.06 2.36-1 .71-.72.94-2.36.94-2.36s.25-1.9.25-3.8V10c0-1.9-.25-3.8-.25-3.8zM9.75 14.6V7.9l6.5 3.35-6.5 3.35z"/>
-              </svg>
-            </a>
-
-          </div>
-        </div>
-
-      </footer>
     </div>
   );
 }
